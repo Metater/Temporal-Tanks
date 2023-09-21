@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1sa8ygthvc5i"
-path="res://.godot/imported/tank_blue.png-dfbdba47b24bcc8d9ef5021c0d39c124.ctex"
+uid="uid://cnesef4672e2w"
+path="res://.godot/imported/tankDark_barrel3.png-87a47fe7a1f6e6bdd0f2e5b1c87d7061.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Topdown Tanks Redux/tank_blue.png"
-dest_files=["res://.godot/imported/tank_blue.png-dfbdba47b24bcc8d9ef5021c0d39c124.ctex"]
+source_file="res://sprites/Topdown Tanks Redux/individual/tankDark_barrel3.png"
+dest_files=["res://.godot/imported/tankDark_barrel3.png-87a47fe7a1f6e6bdd0f2e5b1c87d7061.ctex"]
 
 [params]
 
