@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwo8mc2l6mduk"]
+[gd_scene load_steps=4 format=3 uid="uid://blcq7yplgfspo"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_h0bru"]
 [ext_resource type="Texture2D" uid="uid://1sa8ygthvc5i" path="res://sprites/Topdown Tanks Redux/individual/tank_blue.png" id="2_t8o1f"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7773"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujp5s"]
 size = Vector2(84, 92)
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="Node"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 gravity_scale = 0.0
+can_sleep = false
 script = ExtResource("1_h0bru")
+spawn_position = Vector2(200, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_ujp5s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_t8o1f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_h7773")
