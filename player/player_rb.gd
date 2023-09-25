@@ -12,12 +12,15 @@ var last_turn_direction = 1 # turn CCW by default
 var input_physics_frame_count = 0
 
 func _integrate_forces(state):
+	# apply_central_impulse() Do I want to use this in _physics_process instead????
+	# Modifing the velocity directly may be causing issues when up against walls with an angled movement vector
+	
 	var delta = state.step
 	
 	update_heading(delta)
 	update_linear_velocity(state, delta)
 	
-	$"../Sprite2D".index_pose(position, current_heading)
+	$"../BodySprite2D".index_pose(position, current_heading)
 
 func update_heading(delta):
 	update_desired_heading()

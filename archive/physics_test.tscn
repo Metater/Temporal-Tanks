@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn4se76w4xqdx"]
+
+[ext_resource type="PackedScene" uid="uid://blcq7yplgfspo" path="res://player/player.tscn" id="1_c3dnb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kclo"]
+size = Vector2(400, 200)
+
+[node name="PhysicsTest" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(569, 290)
+shape = SubResource("RectangleShape2D_6kclo")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+
+[node name="Player" parent="." instance=ExtResource("1_c3dnb")]

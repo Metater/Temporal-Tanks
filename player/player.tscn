@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/player_rb.gd" id="1_h0bru"]
 [ext_resource type="Texture2D" uid="uid://1sa8ygthvc5i" path="res://sprites/Topdown Tanks Redux/individual/tank_blue.png" id="2_t8o1f"]
-[ext_resource type="Script" path="res://player/player_sprite.gd" id="3_lu0uu"]
+[ext_resource type="Script" path="res://player/player_visual.gd" id="3_y5ouq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3jg78"]
 radius = 56.0
@@ -18,6 +18,8 @@ script = ExtResource("1_h0bru")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_3jg78")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BodySprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_t8o1f")
-script = ExtResource("3_lu0uu")
+script = ExtResource("3_y5ouq")
+
+[node name="BarrelSprite2D" type="Sprite2D" parent="BodySprite2D"]
