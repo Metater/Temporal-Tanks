@@ -17,7 +17,7 @@ func _physics_process(delta):
 	
 	$"../BodySprite2D".index_pose(position, current_heading)
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	# must use this, not RigidBody2D.lock_rotation
 	# lock_rotation causes player to get stuck on objects when up against them and trying accelerating from zero
 	rotation = 0
