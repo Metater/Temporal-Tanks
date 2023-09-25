@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://desbom5hjn576"]
+
+[ext_resource type="Script" path="res://archive/test_player.gd" id="1_wys6y"]
+[ext_resource type="Texture2D" uid="uid://1pduoa510scn" path="res://sprites/Topdown Tanks Redux/individual/treeGreen_small.png" id="2_ir7d0"]
+
+[node name="TestPlayer" type="Node2D"]
+script = ExtResource("1_wys6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ir7d0")

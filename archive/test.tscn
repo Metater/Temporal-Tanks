@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://chuxq7qtp7ru"]
+
+[ext_resource type="Script" path="res://archive/test.gd" id="1_a3ayd"]
+
+[node name="Test" type="Node"]
+script = ExtResource("1_a3ayd")
+
+[node name="Host" type="Button" parent="."]
+offset_right = 160.0
+offset_bottom = 40.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "Join"
+
+[node name="UniquePeerId" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
