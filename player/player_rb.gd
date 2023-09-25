@@ -34,7 +34,7 @@ func update_heading(delta):
 		var turn_direction = binary_sign(heading_error)
 		# if starting a 180, turn in the direction of the last turn
 		if abs(heading_error) > (0.99999 * PI) && abs(heading_error) < (1.00001 * PI):
-			turn_direction = -last_turn_direction
+			turn_direction = last_turn_direction
 		# turn by max increment in the specified direction
 		current_heading += max_heading_delta * turn_direction
 		last_turn_direction = turn_direction
