@@ -11,16 +11,16 @@ var desired_heading = current_heading
 var last_turn_direction = 1 # turn CCW by default
 var input_physics_frame_count = 0
 
-func _integrate_forces(state):
-	# apply_central_impulse() Do I want to use this in _physics_process instead????
-	# Modifing the velocity directly may be causing issues when up against walls with an angled movement vector
-	
-	var delta = state.step
-	
+func _physics_process(delta):
 	update_heading(delta)
-	update_linear_velocity(state, delta)
+	update_linear_velocity(delta)
 	
 	$"../BodySprite2D".index_pose(position, current_heading)
+
+func _integrate_forces(state):
+	# must use this, not RigidBody2D.lock_rotation
+	# lock_rotation causes player to get stuck on objects when up against them and trying accelerating from zero
+	rotation = 0
 
 func update_heading(delta):
 	update_desired_heading()
@@ -64,21 +64,22 @@ func binary_sign(value):
 		return 1.0
 	return -1.0
 
-func update_linear_velocity(state, delta):
+func update_linear_velocity(delta):
 	# dot product of current_heading and desired_heading, range: [-1, 1]
 	var velocity_fraction = Vector2.from_angle(current_heading).dot(Vector2.from_angle(desired_heading))
 	
 	# set movement_vector to current_heading vector with y flipped
 	var movement_vector = Vector2.from_angle(current_heading) * Vector2(1, -1)
 	var input_accel_fraction = get_input_accel_fraction(delta)
-	var desired_linear_velocity = movement_vector * (forward_speed * velocity_fraction * input_accel_fraction)
+	var desired = movement_vector * (forward_speed * velocity_fraction * input_accel_fraction)
 	if input_physics_frame_count == 0:
-		desired_linear_velocity = Vector2.ZERO
+		desired = Vector2.ZERO
 	
 	# accelerate and apply
-	var desired_linear_velocity_x = move_toward(linear_velocity.x, desired_linear_velocity.x, forward_accel * delta)
-	var desired_linear_velocity_y = move_toward(linear_velocity.y, desired_linear_velocity.y, forward_accel * delta)
-	state.linear_velocity = Vector2(desired_linear_velocity_x, desired_linear_velocity_y)
+	var desired_x = move_toward(linear_velocity.x, desired.x, forward_accel * delta)
+	var desired_y = move_toward(linear_velocity.y, desired.y, forward_accel * delta)
+	var correction_impulse = Vector2(desired_x, desired_y) - linear_velocity
+	apply_central_impulse(correction_impulse)
 func get_input_accel_fraction(delta):
 	var seconds_since_input_began = input_physics_frame_count * delta
 	var t = seconds_since_input_began / input_accel_time

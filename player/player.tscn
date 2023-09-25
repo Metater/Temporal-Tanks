@@ -11,8 +11,6 @@ radius = 56.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 gravity_scale = 0.0
-can_sleep = false
-lock_rotation = true
 script = ExtResource("1_h0bru")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
