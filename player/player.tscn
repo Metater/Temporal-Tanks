@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blcq7yplgfspo"]
+[gd_scene load_steps=6 format=3 uid="uid://blcq7yplgfspo"]
 
 [ext_resource type="Script" path="res://player/player_rb.gd" id="1_h0bru"]
-[ext_resource type="Texture2D" uid="uid://1sa8ygthvc5i" path="res://sprites/Topdown Tanks Redux/individual/tank_blue.png" id="2_t8o1f"]
+[ext_resource type="Texture2D" uid="uid://bx2tynu15txqd" path="res://sprites/Topdown Tanks Redux/individual/tankBody_blue_outline.png" id="2_w4ei8"]
 [ext_resource type="Script" path="res://player/player_visual.gd" id="3_y5ouq"]
+[ext_resource type="Texture2D" uid="uid://brigf70n02q0b" path="res://sprites/Topdown Tanks Redux/individual/tankBlue_barrel2_outline.png" id="4_5fx1h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3jg78"]
 radius = 56.0
@@ -17,7 +18,9 @@ script = ExtResource("1_h0bru")
 shape = SubResource("CircleShape2D_3jg78")
 
 [node name="BodySprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_t8o1f")
+texture = ExtResource("2_w4ei8")
 script = ExtResource("3_y5ouq")
 
 [node name="BarrelSprite2D" type="Sprite2D" parent="BodySprite2D"]
+texture = ExtResource("4_5fx1h")
+offset = Vector2(0, 20)
