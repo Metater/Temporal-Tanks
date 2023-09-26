@@ -14,10 +14,12 @@ var input_physics_frame_count = 0
 func _ready():
 	$"../BodySprite2D".set_body_pose(position, body_current_rotation)
 
-func _process(delta):
+func _process(_delta):
 	# find unit circle angle to point barrel towards mouse
 	var barrel_desired_rotation = ((get_global_mouse_position() - position).normalized() * Vector2(1, -1)).angle()
-	$"../BodySprite2D".set_barrel_rotation(barrel_desired_rotation)
+	# convert from unit circle rotation
+	barrel_desired_rotation = (-barrel_desired_rotation) - PI / 2;
+	$"../BodySprite2D/BarrelSprite2D".global_rotation = barrel_desired_rotation
 
 func _physics_process(delta):
 	update_body_rotation(delta)
