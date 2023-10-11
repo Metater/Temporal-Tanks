@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://player/player_rb.gd" id="1_h0bru"]
 [ext_resource type="Texture2D" uid="uid://bsw7nrvt4s5i" path="res://sprites/target_white.png" id="2_7u63r"]
 [ext_resource type="Texture2D" uid="uid://bx2tynu15txqd" path="res://sprites/Topdown Tanks Redux/individual/tankBody_blue_outline.png" id="2_w4ei8"]
-[ext_resource type="Script" path="res://player/player_visual.gd" id="3_y5ouq"]
 [ext_resource type="Texture2D" uid="uid://brigf70n02q0b" path="res://sprites/Topdown Tanks Redux/individual/tankBlue_barrel2_outline.png" id="4_5fx1h"]
+[ext_resource type="Script" path="res://player/player_body_lerp.gd" id="4_f0vfl"]
 [ext_resource type="Script" path="res://player/player_barrel.gd" id="6_0u4dx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3jg78"]
@@ -17,6 +17,7 @@ gravity_scale = 0.0
 script = ExtResource("1_h0bru")
 
 [node name="DebugSprite2D" type="Sprite2D" parent="RigidBody2D"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.501961)
 scale = Vector2(0.87, 0.87)
 texture = ExtResource("2_7u63r")
@@ -26,7 +27,7 @@ shape = SubResource("CircleShape2D_3jg78")
 
 [node name="BodySprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w4ei8")
-script = ExtResource("3_y5ouq")
+script = ExtResource("4_f0vfl")
 
 [node name="BarrelSprite2D" type="Sprite2D" parent="BodySprite2D"]
 texture = ExtResource("4_5fx1h")

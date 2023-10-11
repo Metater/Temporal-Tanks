@@ -5,7 +5,7 @@ const body_speed = 800 # pixels / sec
 const body_accel_time = 0.5 # sec
 const body_accel = body_speed / body_accel_time # pixels / sec^2
 const input_accel_time = 0.5 # sec
-const barrel_rotation_speed = 8 * PI # radians / sec
+#const barrel_rotation_speed = 2 * PI # radians / sec
 
 var body_current_rotation = PI / 2 # face up by default
 var body_desired_rotation = body_current_rotation
@@ -15,21 +15,20 @@ var input_physics_frame_count = 0
 var barrel_current_rotation = body_current_rotation
 var barrel_desired_rotation = barrel_current_rotation
 
-var bullet = preload("res://bullet/bullet.tscn")
-
-# TODO, ADD RECOIL ON SHOT
+const BulletScene = preload("res://bullet/bullet.tscn")
+@onready var player_body_lerp = $"../BodySprite2D"
 
 func _ready():
-	$"../BodySprite2D".set_body_pose(position, body_current_rotation)
+	player_body_lerp.set_body_pose(position, body_current_rotation)
 
-func _process(delta):
-	update_barrel_rotation(delta)
+func _process(_delta):
+	update_barrel_rotation()
 	
 	if Input.is_action_just_pressed("shoot"):
 		var desired_position = $"../BodySprite2D/BarrelSprite2D/MuzzleNode2D".global_position
 		var impulse = Vector2.UP.rotated(barrel_current_rotation) * 400
 		
-		var instance = bullet.instantiate()
+		var instance = BulletScene.instantiate()
 		instance.get_child(0).shoot(desired_position, impulse)
 		$"../".add_child(instance)
 
@@ -37,7 +36,7 @@ func _physics_process(delta):
 	update_body_rotation(delta)
 	update_linear_velocity(delta)
 	
-	$"../BodySprite2D".index_body_pose(position, body_current_rotation)
+	player_body_lerp.index_body_pose(position, body_current_rotation)
 
 func _integrate_forces(_state):
 	# must use this, not RigidBody2D.lock_rotation
@@ -109,21 +108,26 @@ func get_input_accel_fraction(delta):
 	t = clampf(t, 0, 1)
 	return sqrt(t)
 
-func update_barrel_rotation(delta):
+func update_barrel_rotation():
 	# find unit circle angle to point barrel towards mouse
 	barrel_desired_rotation = ((get_global_mouse_position() - position).normalized() * Vector2(1, -1)).angle()
 	
-	# the most the rotation could change this frame, radians
-	var max_rotation_delta = barrel_rotation_speed * delta;
-	# the unit circle arc distance from barrel_current_rotation to barrel_desired_rotation, radians
-	var rotation_error = Vector2.from_angle(barrel_current_rotation).angle_to(Vector2.from_angle(barrel_desired_rotation))
-	if rotation_error == 0:
-		pass
-	elif abs(rotation_error) <= max_rotation_delta:
-		barrel_current_rotation = barrel_desired_rotation
-	else:
-		# turn by max increment
-		barrel_current_rotation += max_rotation_delta * binary_sign(rotation_error)
+	# point barrel towards mouse
+	$"../BodySprite2D/BarrelSprite2D".global_rotation = convert_angle(barrel_desired_rotation)
 	
-	# convert from unit circle rotation and apply
-	$"../BodySprite2D/BarrelSprite2D".global_rotation = (-barrel_current_rotation) - PI / 2;
+#	# the most the rotation could change this frame, radians
+#	var max_rotation_delta = barrel_rotation_speed * delta;
+#	# the unit circle arc distance from barrel_current_rotation to barrel_desired_rotation, radians
+#	var rotation_error = Vector2.from_angle(barrel_current_rotation).angle_to(Vector2.from_angle(barrel_desired_rotation))
+#	if rotation_error == 0:
+#		pass
+#	elif abs(rotation_error) <= max_rotation_delta:
+#		barrel_current_rotation = barrel_desired_rotation
+#	else:
+#		# turn by max increment
+#		barrel_current_rotation += max_rotation_delta * binary_sign(rotation_error)
+#
+#	$"../BodySprite2D/BarrelSprite2D".global_rotation = convert_angle(barrel_current_rotation)
+
+func convert_angle(angle_rad):
+	return (-angle_rad) - PI / 2
