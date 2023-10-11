@@ -5,7 +5,6 @@ const body_speed = 800 # pixels / sec
 const body_accel_time = 0.5 # sec
 const body_accel = body_speed / body_accel_time # pixels / sec^2
 const input_accel_time = 0.5 # sec
-#const barrel_rotation_speed = 2 * PI # radians / sec
 
 var body_current_rotation = PI / 2 # face up by default
 var body_desired_rotation = body_current_rotation

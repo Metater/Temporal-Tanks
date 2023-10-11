@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://blcq7yplgfspo"]
+[gd_scene load_steps=8 format=3 uid="uid://do84njkve8m70"]
 
-[ext_resource type="Script" path="res://player/player_rb.gd" id="1_h0bru"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_lykma"]
 [ext_resource type="Texture2D" uid="uid://bsw7nrvt4s5i" path="res://sprites/target_white.png" id="2_7u63r"]
 [ext_resource type="Texture2D" uid="uid://bx2tynu15txqd" path="res://sprites/Topdown Tanks Redux/individual/tankBody_blue_outline.png" id="2_w4ei8"]
 [ext_resource type="Texture2D" uid="uid://brigf70n02q0b" path="res://sprites/Topdown Tanks Redux/individual/tankBlue_barrel2_outline.png" id="4_5fx1h"]
@@ -14,7 +14,7 @@ radius = 56.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 gravity_scale = 0.0
-script = ExtResource("1_h0bru")
+script = ExtResource("1_lykma")
 
 [node name="DebugSprite2D" type="Sprite2D" parent="RigidBody2D"]
 visible = false
